@@ -1,7 +1,7 @@
 # services/sightengine_service.py
 
 import requests
-from config import (
+from backend.config import (
     SIGHTENGINE_API_USER,
     SIGHTENGINE_API_SECRET,
     SIGHTENGINE_ENDPOINT
