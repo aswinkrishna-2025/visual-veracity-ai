@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import os
 
-from services.sightengine_service import analyze_image
+from backend.services.sightengine_service import analyze_image
 
 app = FastAPI(title="TrueLens AI Detection API")
 
