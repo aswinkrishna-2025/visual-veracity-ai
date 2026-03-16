@@ -29,8 +29,8 @@ export async function analyzeImage(file: File): Promise<AnalysisResult> {
     cnn_score: data.ai_score || 0,
     sightengine_score: data.ai_score || 0,
     explanation: [
-      `AI Score: ${data.ai_score || 0}`,
-      `Human Score: ${data.human_score || 0}`
+      `AI Score: ${Number(data.ai_score || 0).toFixed(2)}`,
+      `Human Score: ${Number(data.human_score || 0).toFixed(2)}`
     ]
   };
 }
