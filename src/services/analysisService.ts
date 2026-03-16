@@ -19,5 +19,18 @@ export async function analyzeImage(file: File): Promise<AnalysisResult> {
 
   const data = await response.json();
 
-  return data;
+  if (data.error) {
+    throw new Error(data.error);
+  }
+
+  return {
+    prediction: data.prediction || "REAL",
+    confidence: (data.confidence || 0) / 100, // Normalize to 0-1 if backend returns 0-100
+    cnn_score: data.ai_score || 0,
+    sightengine_score: data.ai_score || 0,
+    explanation: [
+      `AI Score: ${data.ai_score || 0}`,
+      `Human Score: ${data.human_score || 0}`
+    ]
+  };
 }
