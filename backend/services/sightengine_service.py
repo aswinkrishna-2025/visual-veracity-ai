@@ -26,12 +26,13 @@ def analyze_image(image_path: str):
 
         # Extract AI detection scores
         ai_score = result.get("type", {}).get("ai_generated", 0)
-        human_score = result.get("type", {}).get("human", 0)
 
-        # Decide prediction
-        prediction = "AI_GENERATED" if ai_score > human_score else "REAL"
-
-        confidence = max(ai_score, human_score)
+        # The genai model returns a probability of the image being AI-generated.
+        prediction = "AI_GENERATED" if ai_score > 0.5 else "REAL"
+        
+        # Calculate confidence based on prediction
+        confidence = ai_score if prediction == "AI_GENERATED" else (1 - ai_score)
+        human_score = 1 - ai_score
 
         return {
             "prediction": prediction,
